@@ -11,33 +11,48 @@ const my_reservations_section = document.getElementById('my-reservations-section
 const content = document.getElementById('content');
 const hr = document.getElementById('my-reservations-hr');
 const title = document.querySelector('h2');
+const mobile_content = document.getElementById('mobile-content');
+const eventClass = document.getElementById('content');
+let previouslySelectedNav = home
 
 let navLocked = false;
 
 if (home) {
     home.onclick = function () {
-         if (navLocked) {
+        if (navLocked) {
             alert("Please submit the event or close the form before navigating.");
             return;
         }
         my_reservations_section.style.display = 'none'
         content.style.display = 'flex'
+        mobile_content.style.display = 'flex'
         hr.style.display = 'none'
         title.innerHTML = 'UPCOMING EVENTS';
         home.style.backgroundColor = '#B8CFCE';
         add_event.style.backgroundColor = '#7F8CAA';
         my_reservations.style.backgroundColor = '#7F8CAA';
+        previouslySelectedNav = home;
     };
 }
 
 if (mobile_home) {
     mobile_home.onclick = function () {
-         if (navLocked) {
+        if (navLocked) {
             alert("Please submit the event or close the form before navigating.");
             return;
         }
+        my_reservations_section.style.display = 'none'
+        hr.style.display = 'none'
+        content.style.display = 'flex'
+        mobile_content.style.display = 'flex'
+        title.innerHTML = 'UPCOMING EVENTS';
+        home.style.backgroundColor = '#B8CFCE';
+        add_event.style.backgroundColor = '#7F8CAA';
+        my_reservations.style.backgroundColor = '#7F8CAA';
+        previouslySelectedNav = home;
     };
 }
+
 
 if (add_event) {
     add_event.onclick = function () {
@@ -66,16 +81,36 @@ if (my_reservations) {
             return;
         }
         content.style.display = 'none'
+        mobile_content.style.display = 'none'
         my_reservations_section.style.display = 'flex'
         hr.style.display = 'block'
         title.innerHTML = 'MY RESERVATIONS';
         my_reservations.style.backgroundColor = '#B8CFCE';
         home.style.backgroundColor = '#7F8CAA';
         add_event.style.backgroundColor = '#7F8CAA';
+        previouslySelectedNav = my_reservations;
     };
 }
 
-if (logout) {
+if (mobile_myreservations) {
+    mobile_myreservations.onclick = function () {
+        if (navLocked) {
+            alert("Please submit the event or close the form before navigating.");
+            return;
+        }
+        content.style.display = 'none'
+        mobile_content.style.display = 'none'
+        my_reservations_section.style.display = 'flex'
+        hr.style.display = 'block'
+        title.innerHTML = 'MY RESERVATIONS';
+        my_reservations.style.backgroundColor = '#B8CFCE';
+        home.style.backgroundColor = '#7F8CAA';
+        add_event.style.backgroundColor = '#7F8CAA';
+        previouslySelectedNav = my_reservations;
+    };
+}
+
+if (logout || mobile_logout) {
     logout.onclick = function () {
         if (navLocked) {
             alert("Please submit the event or close the form before navigating.");
@@ -89,19 +124,7 @@ if (logout) {
     };
 }
 
-if (mobile_logout) {
-    mobile_logout.onclick = function () {
-        if (navLocked) {
-            alert("Please submit the event or close the form before navigating.");
-            return;
-        }
-        if (confirm("Are you sure you want to logout?")) {
-            location.href = "login.html";
-        } else {
-            history.back();
-        }
-    };
-}
+
 
 // Sort dropdown functionality
 const sortDropdown = document.querySelector('.sort-dropdown-container');
@@ -168,10 +191,23 @@ const add_section = document.getElementById('add-event-section')
 if (close_add) {
     close_add.onclick = function () {
         add_section.style.display = 'none';
-        home.style.backgroundColor = '#B8CFCE';
+        navLocked = false;
+
+        home.style.backgroundColor = '#7F8CAA';
         add_event.style.backgroundColor = '#7F8CAA';
         my_reservations.style.backgroundColor = '#7F8CAA';
-        navLocked = false;
+
+        if (previouslySelectedNav) {
+            previouslySelectedNav.style.backgroundColor = '#B8CFCE';
+        }
     };
 }
+
+if (eventClass) {
+    eventClass.onclick = function() {
+        location.href = 'detail.html'
+    }
+    eventClass.style.cursor = 'pointer';
+}
+
 

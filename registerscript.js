@@ -37,3 +37,23 @@ if (signupButton) {
     location.href = "signup.html";
   };
 }
+
+// Redirection to the home page
+
+const login_Button = document.querySelector('button[name="login button"]');
+const formInputs = document.querySelectorAll('.formInput');
+
+if (login_Button) {
+    login_Button.onclick = function () {
+        const usernameOrEmail = formInputs[0].value.trim();
+        const password = formInputs[1].value.trim();
+
+        if (usernameOrEmail && password) {
+            // Redirect to home page
+            window.location.href = 'home.html';
+        } else {
+            alert('Please fill in both fields.');
+        }
+    };
+}
+
