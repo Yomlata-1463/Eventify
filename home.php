@@ -1,10 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventify</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="home-style.css?v=<?php echo time(); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
@@ -16,12 +23,12 @@
             <img src="./assets/icons8-search-48 1.png" alt="Search Icon" class="search-icon">
             <input type="text" class="search" placeholder="Search Events">
         </div>
-        <a href="#"><img src="./assets/Group 16.png" alt="Profile Picture" class="profile-pic"></a>
+        <a href="./profile.html"><img src="./assets/Group 16.png" alt="Profile Picture" class="profile-pic"></a>
     </header>
     <header id="mobile-header">
         <div id="upper-header">
             <h1>Eventify</h1>
-            <a href="#"><img src="./assets/Group 16.png" alt="Profile Picture" class="profile-pic"></a>
+            <a href="./profile.html"><img src="./assets/Group 16.png" alt="Profile Picture" class="profile-pic"></a>
         </div>
         
         <div class="search-container" id="mobile-search-container">
@@ -86,7 +93,7 @@
             <br><br><br>
             <div class="nav-items" id="logout-nav">
                 <img src="./assets/logout-icon.png" alt="Logout icon">
-                <a href="#">Logout</a>                
+                <a href="logout.php">Logout</a>                
             </div>
             
         </nav>
@@ -165,16 +172,100 @@
         </section>
         <section id="add-event-section">
             <div class="add-event-container">
-                <h2>Add Event</h2>
-                <form action="">
-                    
+                <h2>ADD YOUR EVENT</h2>
+                <button id="close-btn">&times;</button>
+                <form >
+                    <div class="form-row" id="form-event-name">
+                        <label>Event Name:</label>
+                        <input type="text" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-organizer">
+                        <label>Organizer:</label>
+                        <input type="text" placeholder="If left blank, your username will be used" />
+                    </div>
+                    <div class="form-row" id="form-location">
+                        <label>Location:</label>
+                        <input type="text" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-datetime">
+                        <label>Date/time:</label>
+                        <input type="datetime-local" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-description">
+                        <label>Description:</label>
+                        <textarea rows="10"></textarea><div id="description-req"><span class="required">* max 600 characters</span></div>
+                    </div>
+                    <div class="form-row" id="form-available">
+                        <label>Available Spots:</label>
+                        <input type="number" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-contact-info">
+                        <label>Contact Info:</label>
+                        <input type="tel" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-event-type">
+                        <label>Event Type:</label>
+                        <select>
+                            <option>Meetup</option>
+                            <option>Conference</option>
+                            <option>Workshop</option>
+                        </select>   
+                    </div>
+                    <div class="form-row" id="form-deadline">
+                        <label>Deadline:</label>
+                        <input type="number" min="0" max="31" placeholder="DD" />
+                        <span>:</span>
+                        <input type="number" min="0" max="23" placeholder="HH" />
+                        <span>:</span>
+                        <input type="number" min="0" max="59" placeholder="MM" /><span class="required">*</span>
+                    </div>
+                    <div class="form-row" id="form-upload">
+                        <label>Upload Photo:</label>
+                        <div class="upload-box">+</div><span class="required">*</span>
+                    </div>
+                    <button type="submit" class="submit-btn">Create Event</button>   
                 </form>
             </div>
         </section>
+
+        <section id="my-reservations-section">
+            <div id="my-reservations-card">
+                <div id="my-reservations-image">
+                    <img src="./assets/video-image 1 (1).png" alt="Event Picture">
+                </div>
+                <div id="my-reservations-details">
+                    <div id="my-reservations-date">July 15, 2025 – 10:00 AM</div>
+                    <div id="my-reservations-name">Tech Leaders Meetup</div>
+                    <div id="my-reservations-location">Skylight Hotel</div>
+                    <div id="my-reservations-attendees">22 attendees joined</div> 
+                </div>
+                <button id="close-btn">&times;</button>
+            </div>
+        </section>
+        <hr id="my-reservations-hr">
     </main>
 
+    <footer class="main-footer">
+        <div class="footer-left">
+            <div class="footer-follow">Follow Us</div>
+            <div class="footer-socials">
+            <img src="./assets/facebook.png" alt="Facebook" />
+            <img src="./assets/x.png" alt="X" />
+            <img src="./assets/instagram.png" alt="Instagram" />
+            <img src="./assets/youtube.png" alt="YouTube" />
+            <img src="./assets/tiktok.png" alt="TikTok" />
+            </div>
+            <div class="footer-copyright">© 2025 <b>Eventify</b></div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-right">
+            <div class="footer-contact">
+            For more information contact us on<br />
+            <b>Eventifysupport@gmail.com</b>
+            </div>
+        </div>
+    </footer>
 
-    
     <script src="./home-script.js"></script>
     
 </body>

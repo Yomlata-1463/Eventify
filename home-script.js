@@ -2,11 +2,11 @@
 const home = document.getElementById('home-nav');
 const add_event = document.getElementById('addevent-nav');
 const my_reservations = document.getElementById('myreservations-nav');
-const logout = document.getElementById('logout-nav');
+
 const mobile_home = document.getElementById('mobile-home-nav');
 const mobile_addevent = document.getElementById('mobile-add-nav');
 const mobile_myreservations = document.getElementById('mobile-myreservation-nav');
-const mobile_logout = document.getElementById('mobile-logout-nav');
+
 const my_reservations_section = document.getElementById('my-reservations-section');
 const content = document.getElementById('content');
 const hr = document.getElementById('my-reservations-hr');
@@ -110,22 +110,6 @@ if (mobile_myreservations) {
     };
 }
 
-if (logout || mobile_logout) {
-    logout.onclick = function () {
-        if (navLocked) {
-            alert("Please submit the event or close the form before navigating.");
-            return;
-        }
-        if (confirm("Are you sure you want to logout?")) {
-            location.href = "login.html";
-        } else {
-            history.back();
-        }
-    };
-}
-
-
-
 // Sort dropdown functionality
 const sortDropdown = document.querySelector('.sort-dropdown-container');
 const sortBtn = document.getElementById('sort-btn');
@@ -155,7 +139,6 @@ if (sortBtn && sortDropdown && sortOptions) {
 const mobile_home_Btn = document.getElementById('mobile-home-nav');
 const mobile_add_Btn = document.getElementById('mobile-add-nav');
 const mobile_my_reservation_Btn = document.getElementById('mobile-myreservation-nav');
-const mobile_logout_Btn = document.getElementById('mobile-logout-nav');
 
 const minimized = document.getElementById('menu-icon');
 const expanded = document.getElementById('menu-icon-clicked');
@@ -177,11 +160,7 @@ if (mobile_home_Btn) {
     }
 }
 
-if (mobile_logout_Btn) {
-    mobile_logout_Btn.onclick = function () {
-        location.href = "login.html"
-    }
-}
+
 
 
 
