@@ -175,13 +175,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sort-control'])) {
                 if (in_array($row['id'], $reserved_event_ids)) {
                     continue;
                 }
-                $deadlineText = getReservationDeadline($row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']);
+                $deadlineText = getReservationDeadline($row['created_at'], $row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']);
                 if ($deadlineText === false) {
                     continue;
                 }
             ?>
             
-            <div class="event-card">
+            <div class="event-card" data-event-id="<?php echo $row['id']; ?>">
                 <div class="event-card-header">
                     <img src="<?php echo $row['profile_picture']; ?>" alt="Profile Picture" class="event-avatar">
                     <div class="event-user-info">
@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sort-control'])) {
                     <img src="<?php echo $row['photo']; ?>" alt="Event Photo">
                 </div>
                 <div class="event-card-footer">
-                    <div><strong>Deadline:</strong> <span class="event-deadline"><?php echo getReservationDeadline($row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']); ?></span></div>
+                    <div><strong>Deadline:</strong> <span class="event-deadline"><?php echo getReservationDeadline($row['created_at'], $row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']); ?></span></div>
                     <div><strong>Event Type:</strong> <span class="event-type"><?php echo $row['event_type']; ?></span></div>
                     <form method="post" style="display:inline;">
                         <input type="hidden" name="reserve_event_id" value="<?php echo $row['id']; ?>">
@@ -235,12 +235,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sort-control'])) {
                 if (in_array($row['id'], $reserved_event_ids)) {
                     continue;
                 }
-                $deadlineText = getReservationDeadline($row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']);
+                $deadlineText = getReservationDeadline($row['created_at'], $row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']);
                 if ($deadlineText === false) {
                     continue;
                 }
             ?>
-            <div class="mobile-event-card">
+            <div class="mobile-event-card" data-event-id="<?php echo $row['id']; ?>">
                 <div class="mobile-event-card-header">
                     <img src="<?php echo $row['profile_picture']; ?>" alt="Profile Picture" class="event-avatar">
                     <div class="mobile-event-user-info">
@@ -267,15 +267,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sort-control'])) {
                 <div class="mobile-event-card-footer">
                     <div class="event-item">
                         <img src="./assets/circle.png" alt="Available spots">
-                        <div>54</div> 
+                        <div><?php echo $row['available_spots']; ?></div> 
                     </div>
                     <div class="event-item">
                         <img src="./assets/time.png" alt="deadline">
-                        <div>2 hours left</div>
+                        <div><?php echo getReservationDeadline($row['created_at'], $row['deadline_days'], $row['deadline_hours'], $row['deadline_minutes']); ?></div>
                     </div>
                     <div class="event-item">
                         <img src="./assets/type.png" alt="type"> 
-                        <div>Meetup</div>
+                        <div><?php echo $row['event_type']; ?></div>
                     </div>
                 </div> 
                 <form method="post" style="display:inline;">

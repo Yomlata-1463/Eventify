@@ -1,3 +1,17 @@
+<?php include_once 'detail-logic.php';
+
+$is_reserved = false;
+
+if (isset($_SESSION['user_id'])) {
+    $uid = $_SESSION['user_id'];
+    $eid = $event['id'];
+    $check = $conn->query("SELECT id FROM reservations WHERE user_id = $uid AND event_id = $eid");
+    if ($check && $check->num_rows > 0) {
+        $is_reserved = true;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +33,10 @@
         <div id="content-header">
             <button name="back button"><img src="./assets/back.png" alt="back button"></button>
             <div id="heading-intro">
-                <h2 class="event-title">Tech Leaders Meetup</h2>
+                <h2 class="event-title"><?php echo $event['event_name']; ?></h2>
                 <div id="head-image">
                     <img src="./assets/Group 16.png" alt="">
-                    <div class="hosted-by">Hosted by <span>Abebe</span></div>
+                    <div class="hosted-by">Hosted by <span><?php echo $event['organizer']; ?></span></div>
                 </div>
             </div>
         </div>
@@ -30,46 +44,45 @@
         <hr>
 
         <div id="content">
-            <div id="event-picture"><img src="./assets/video-image 1 (1).png" alt="event Picture"></div>
+            <div id="event-picture"><img src="<?php echo $event['photo']; ?>" alt="event Picture"></div>
 
             <div id="time-type">
-                <div><img src="./assets/calander.png" alt="date and time"> <span>July 15, 2025 – 10:00 AM</span></div>
-                <div><img src="./assets/type.png" alt="type"> <span>Meetup</span></div>
+                <div><img src="./assets/calander.png" alt="date and time"> <span><?php echo date('F j, Y – g:i A', strtotime($event['event_datetime'])); ?></span></div>
+                <div><img src="./assets/type.png" alt="type"> <span><?php echo $event['event_type']; ?></span></div>
             </div>
 
             <div class="event-description">
                 <h3>Description</h3>
-                <p>Join us for the Tech Leaders Meetup, an exclusive gathering of visionary developers, IT professionals, startup founders, and tech executives who are shaping the future of technology in Ethiopia and beyond.<br><br>This event offers a platform for meaningful dialogue around innovation, digital transformation, leadership challenges, and emerging tech trends. Attendees will gain insights through expert-led panel discussions, lightning talks from local entrepreneurs, and peer networking designed to foster long-term collaboration.<br><br>Whether you're leading a development team, scaling a startup, or managing enterprise solutions, the Tech Leaders Meetup is your opportunity to connect, learn, and lead.<br><br>Highlights include:</p>
-                <ul>
-                    <li>Panel: "Leading Teams in an AI-Driven World"</li>
-                    <li>Fireside Chat with Ethiopian Tech Founders</li>
-                    <li>Demo Corner: Explore local tech innovations</li>
-                    <li>Networking Mixer with refreshments</li>
-                </ul>
+                <p><?php echo $event['description']; ?></p>
             </div>
 
             <div class="event-info">
                 <h3>Location</h3>
-                <p>Skylight Hotel</p>
+                <p><?php echo $event['location']; ?></p>
             </div>
 
             <div class="event-info">
                 <h3>Available Spots</h3>
-                <p>54 left</p>
+                <p><?php echo $event['available_spots']; ?> left</p>
             </div>
 
             <div class="event-info">
                 <h3>Deadline</h3>
-                <p>00:02:10</p>
+                <p><?php echo getReservationDeadline($event['created_at'], $event['deadline_days'], $event['deadline_hours'], $event['deadline_minutes']); ?></p>
             </div>
 
             <div class="event-info">
                 <h3>For More Information</h3>
-                <p>+251949823983</p>
+                <p><?php echo $event['contact_info']; ?></p>
             </div>
 
             <div id="reserve-btn">
-                <button id="reserve-button">Reserve</button>
+                <form method="post" action="home-logic.php">
+                    <input type="hidden" name="<?php echo $is_reserved ? 'unreserve_event_id' : 'reserve_event_id'; ?>" value="<?php echo $event['id']; ?>">
+                    <button id="reserve-button" type="submit">
+                        <?php echo $is_reserved ? 'Reserved' : 'Reserve'; ?>
+                    </button>
+                </form>
             </div>
         </div>
     </main>

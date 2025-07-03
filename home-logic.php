@@ -58,16 +58,17 @@ function timeAgo($datetime) {
     return date('M d, Y', $timestamp);
 }
 
-function getReservationDeadline($deadline_days, $deadline_hours, $deadline_minutes) {
-    $secondsLeft =
-        ($deadline_days * 24 * 60 * 60) +
-        ($deadline_hours * 60 * 60) +
-        ($deadline_minutes * 60);
+function getReservationDeadline($created_at, $deadline_days, $deadline_hours, $deadline_minutes) {
+    $deadline_seconds = ($deadline_days * 24 * 60 * 60) + ($deadline_hours * 60 * 60) + ($deadline_minutes * 60);
+    $created_timestamp = strtotime($created_at);
+    $deadline_timestamp = $created_timestamp + $deadline_seconds;
+
+    $now = time();
+    $secondsLeft = $deadline_timestamp - $now;
 
     if ($secondsLeft <= 0) {
         return false;
     }
-
 
     $days = floor($secondsLeft / (24 * 60 * 60));
     $hours = floor(($secondsLeft % (24 * 60 * 60)) / (60 * 60));
@@ -228,6 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['unreserve_event_id'])
     }
     $event_id = intval($_POST['unreserve_event_id']);
     $conn->query("DELETE FROM reservations WHERE user_id = $user_id AND event_id = $event_id");
+    $conn->query("UPDATE events SET available_spots = available_spots + 1 WHERE id = $event_id");
     header('Location: home.php');
     exit();
 }

@@ -155,11 +155,22 @@ if (close_add) {
     };
 }
 
-if (eventClass) {
-    eventClass.onclick = function() {
-        location.href = 'detail.php'
-    }
-    eventClass.style.cursor = 'pointer';
-}
+document.querySelectorAll('.event-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const eventId = card.getAttribute('data-event-id');
+        if (eventId) {
+            window.location.href = `detail.php?id=${eventId}`;
+        }
+    });
+});
 
+document.querySelectorAll('.mobile-event-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+        if (e.target.tagName === 'BUTTON' || e.target.closest('form')) return;
+        const eventId = card.getAttribute('data-event-id');
+        if (eventId) {
+            window.location.href = `detail.php?id=${eventId}`;
+        }
+    });
+});
 

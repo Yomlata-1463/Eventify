@@ -216,6 +216,7 @@ h2{
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
 }
 
 .event-card-header {
@@ -475,9 +476,11 @@ form {
 #my-reservations-section {
     z-index: 50;
     display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding-top: 32px;
+    gap: 130px;
 }
 
 #my-reservations-card {
@@ -489,7 +492,7 @@ form {
     min-width: 900px;
     max-width: 1200px;
     margin-top: -100px;
-    margin-left: -140px;
+    margin-left:100px;
     position: relative;
     gap: 12px;
 }
@@ -746,6 +749,7 @@ form {
         margin-bottom: 50px;
         background-color: #B8CFCE;
         border-radius: 5%;
+        cursor: pointer;
     }
     .mobile-event-card-image img{
         width: 185px;
