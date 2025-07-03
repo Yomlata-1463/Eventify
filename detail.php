@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventify - Detail</title>
+    <link rel="stylesheet" href="./detail-style.css?v=<?php echo time(); ?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Eventify</h1>
+        <a href="#"><img src="./assets/Group 16.png" alt="Profile Picture" class="profile-pic"></a>
+    </header>
+
+    <main>
+        <div id="content-header">
+            <button name="back button"><img src="./assets/back.png" alt="back button"></button>
+            <div id="heading-intro">
+                <h2 class="event-title">Tech Leaders Meetup</h2>
+                <div id="head-image">
+                    <img src="./assets/Group 16.png" alt="">
+                    <div class="hosted-by">Hosted by <span>Abebe</span></div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div id="content">
+            <div id="event-picture"><img src="./assets/video-image 1 (1).png" alt="event Picture"></div>
+
+            <div id="time-type">
+                <div><img src="./assets/calander.png" alt="date and time"> <span>July 15, 2025 – 10:00 AM</span></div>
+                <div><img src="./assets/type.png" alt="type"> <span>Meetup</span></div>
+            </div>
+
+            <div class="event-description">
+                <h3>Description</h3>
+                <p>Join us for the Tech Leaders Meetup, an exclusive gathering of visionary developers, IT professionals, startup founders, and tech executives who are shaping the future of technology in Ethiopia and beyond.<br><br>This event offers a platform for meaningful dialogue around innovation, digital transformation, leadership challenges, and emerging tech trends. Attendees will gain insights through expert-led panel discussions, lightning talks from local entrepreneurs, and peer networking designed to foster long-term collaboration.<br><br>Whether you're leading a development team, scaling a startup, or managing enterprise solutions, the Tech Leaders Meetup is your opportunity to connect, learn, and lead.<br><br>Highlights include:</p>
+                <ul>
+                    <li>Panel: "Leading Teams in an AI-Driven World"</li>
+                    <li>Fireside Chat with Ethiopian Tech Founders</li>
+                    <li>Demo Corner: Explore local tech innovations</li>
+                    <li>Networking Mixer with refreshments</li>
+                </ul>
+            </div>
+
+            <div class="event-info">
+                <h3>Location</h3>
+                <p>Skylight Hotel</p>
+            </div>
+
+            <div class="event-info">
+                <h3>Available Spots</h3>
+                <p>54 left</p>
+            </div>
+
+            <div class="event-info">
+                <h3>Deadline</h3>
+                <p>00:02:10</p>
+            </div>
+
+            <div class="event-info">
+                <h3>For More Information</h3>
+                <p>+251949823983</p>
+            </div>
+
+            <div id="reserve-btn">
+                <button id="reserve-button">Reserve</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-left">
+            <div class="footer-follow">Follow Us</div>
+            <div class="footer-socials">
+            <img src="./assets/facebook.png" alt="Facebook" />
+            <img src="./assets/x.png" alt="X" />
+            <img src="./assets/instagram.png" alt="Instagram" />
+            <img src="./assets/youtube.png" alt="YouTube" />
+            <img src="./assets/tiktok.png" alt="TikTok" />
+            </div>
+            <div class="footer-copyright">© 2025 <b>Eventify</b></div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-right">
+            <div class="footer-contact">
+            For more information contact us on<br />
+            <b>Eventifysupport@gmail.com</b>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="./detail-script.js"></script>
+</body>
+</html>

@@ -11,32 +11,32 @@ if (isset($_POST['register'])){
 
     // Server-side empty field validation
     if ($username === '') {
-        $_SESSION['register_error'] = 'Please enter a username.';
+        $_SESSION['register_error'] = 'please fill username';
         $_SESSION['active_form'] = 'register';
         header("Location: signup.php");
         exit();
     }
     if ($email === '') {
-        $_SESSION['register_error'] = 'Please enter your email address.';
+        $_SESSION['register_error'] = 'please fill email';
         $_SESSION['active_form'] = 'register';
         header("Location: signup.php");
         exit();
     }
     if ($password === '') {
-        $_SESSION['register_error'] = 'Please enter a password.';
+        $_SESSION['register_error'] = 'please fill password';
         $_SESSION['active_form'] = 'register';
         header("Location: signup.php");
         exit();
     }
     if ($confirm === '') {
-        $_SESSION['register_error'] = 'Please confirm your password.';
+        $_SESSION['register_error'] = 'please fill confirm password';
         $_SESSION['active_form'] = 'register';
         header("Location: signup.php");
         exit();
     }
 
     if ($password !== $confirm) {
-        $_SESSION['register_error'] = 'Passwords do not match.';
+        $_SESSION['register_error'] = 'Passwords do not match!';
         $_SESSION['active_form'] = 'register';
         header("Location: signup.php");
         exit();
@@ -52,10 +52,10 @@ if (isset($_POST['register'])){
     $usernameExists = $checkUsername->num_rows > 0;
 
     if ($emailExists) {
-        $_SESSION['register_error'] = 'This email is already registered.';
+        $_SESSION['register_error'] = 'Email is already registered!';
         $_SESSION['active_form'] = 'register';
     } elseif ($usernameExists) {
-        $_SESSION['register_error'] = 'This username is already taken.';
+        $_SESSION['register_error'] = 'Username is already registered!';
         $_SESSION['active_form'] = 'register';
     } else {
         $conn->query("INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')");
@@ -91,6 +91,7 @@ if (isset($_POST['login'])){
         if (password_verify($password, $user['password'])){
             $_SESSION['username'] = $user['username'];
             $_SESSION['email'] = $user['email'];
+            $_SESSION['user_id'] = $user['id'];
 
             header("Location: home.php");
             exit();

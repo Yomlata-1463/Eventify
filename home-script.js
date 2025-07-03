@@ -110,30 +110,7 @@ if (mobile_myreservations) {
     };
 }
 
-// Sort dropdown functionality
-const sortDropdown = document.querySelector('.sort-dropdown-container');
-const sortBtn = document.getElementById('sort-btn');
-const sortOptions = document.getElementById('sort-options');
 
-if (sortBtn && sortDropdown && sortOptions) {
-    sortBtn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        sortDropdown.classList.toggle('active');
-    });
-
-    sortOptions.addEventListener('click', function(e) {
-        if (e.target.tagName === 'LI') {
-            sortBtn.innerHTML = e.target.textContent + ' <img src="./assets/dropdown.png" alt="dropdown icon" class="dropdown-icon">';
-            sortDropdown.classList.remove('active');
-        }
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!sortDropdown.contains(e.target)) {
-            sortDropdown.classList.remove('active');
-        }
-    });
-}
 
 // Mobile menu fuctionality
 const mobile_home_Btn = document.getElementById('mobile-home-nav');
@@ -154,11 +131,7 @@ if (minimized && expanded) {
     }
 }
 
-if (mobile_home_Btn) {
-    mobile_home_Btn.onclick = function () {
-        location.href = "home.html"
-    }
-}
+
 
 
 
@@ -184,7 +157,7 @@ if (close_add) {
 
 if (eventClass) {
     eventClass.onclick = function() {
-        location.href = 'detail.html'
+        location.href = 'detail.php'
     }
     eventClass.style.cursor = 'pointer';
 }
