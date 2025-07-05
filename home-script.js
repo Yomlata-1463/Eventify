@@ -17,6 +17,73 @@ let previouslySelectedNav = home
 
 let navLocked = false;
 
+// Search bar functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInputs = document.querySelectorAll('.search');
+    const eventCards = document.querySelectorAll('.event-card');
+    const mobileEventCards = document.querySelectorAll('.mobile-event-card');
+    const myReservationCards = document.querySelectorAll('#my-reservations-card');
+
+    console.log('Search inputs found:', searchInputs.length);
+    console.log('Event cards found:', eventCards.length);
+    console.log('Mobile event cards found:', mobileEventCards.length);
+    console.log('My reservation cards found:', myReservationCards.length);
+
+    function filterEvents(searchTerm) {
+        console.log('Filtering events with term:', searchTerm);
+        const term = searchTerm.toLowerCase().trim();
+        
+        eventCards.forEach(card => {
+            const eventNameElement = card.querySelector('.event-details .event-row:first-child span:first-child');
+            
+            if (eventNameElement) {
+                const eventName = eventNameElement.textContent.toLowerCase();
+                const matches = eventName.includes(term);
+                console.log('Event name:', eventName, 'Matches:', matches);
+                
+                card.style.display = matches ? 'block' : 'none';
+            }
+        });
+        
+        mobileEventCards.forEach(card => {
+            const eventNameElement = card.querySelector('.event-name');
+            
+            if (eventNameElement) {
+                const eventName = eventNameElement.textContent.toLowerCase();
+                const matches = eventName.includes(term);
+                console.log('Mobile event name:', eventName, 'Matches:', matches);
+                
+                card.style.display = matches ? 'block' : 'none';
+            }
+        });
+        
+        myReservationCards.forEach(card => {
+            const eventNameElement = card.querySelector('#my-reservations-name');
+            
+            if (eventNameElement) {
+                const eventName = eventNameElement.textContent.toLowerCase();
+                const matches = eventName.includes(term);
+                console.log('My reservation event name:', eventName, 'Matches:', matches);
+                
+                card.style.display = matches ? 'flex' : 'none';
+            }
+        });
+    }
+
+    searchInputs.forEach(input => {
+        input.addEventListener('input', (e) => {
+            filterEvents(e.target.value);
+        });
+        
+        input.addEventListener('keyup', (e) => {
+            if (e.key === 'Escape') {
+                input.value = '';
+                filterEvents('');
+            }
+        });
+    });
+});
+
 if (home) {
     home.onclick = function () {
         if (navLocked) {

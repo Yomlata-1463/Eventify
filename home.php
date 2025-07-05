@@ -406,7 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sort-control'])) {
         </div>
     </footer>
 
-    <script src="./home-script.js"></script>
+    <script src="./home-script.js?v=<?php echo time(); ?>"></script>
     
 </body>
 </html>
